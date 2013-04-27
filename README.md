@@ -28,7 +28,7 @@ Your mileage may vary.
 3. Modify 'configuration.db' with one entry per line in the following format: ```Name|URL|ContextString```, where "Name" is the display name of the web service, "URL" is the URL to check, and "Context" is a bit of HTML code that must be contained in the checked page. An example entry is included.
 4. Make sure 'tempwork.db' is writeable by the webserver ```chmod oug+rw tempwork.db```
 
-Ta-dah.
+Ta-da.
 
 ##What's going on?
 * The 'configuration.db' file sets the web services to poll. 
