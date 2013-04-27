@@ -32,7 +32,7 @@ Ta-dah.
 
 ##What's going on?
 * The 'configuration.db' file sets the web services to poll. 
-* Updates are user-triggered (when the page is visited), at a maximum of 1 update per 60 seconds.
+* Updates are user-triggered (when the page is visited), at a maximum of 1 update per 30 seconds.
 * A service is deemed "OK" if the HTTP status code is '200' and the HTML contains the context string.
 * A service is deemed "Degraded" if the HTTP status code is '200' and the HTML does **not** contain the context string.
 * A service is deemed "Down" if the HTTP status code is not '200' (redirects are followed, eventually resulting in a 200).

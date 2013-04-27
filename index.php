@@ -59,7 +59,7 @@ function printStatus() {
 
   //Print out 
   print('<table class="table table-bordered table-hover">
-           <tr><th>Status</th><th>URL</th></tr>');
+           <tr><th>Status</th><th>Service</th><th>Time / Error</th></tr>');
  
   //Shift the list to skip the update time
   array_shift($siteList);
@@ -78,6 +78,7 @@ function printStatus() {
     print('<tr>' .
             '<td style="text-align:center;">' . $site[3] . '</td>' .
             '<td>' . $site[0] . '</td>' .
+			'<td>' . $site[4] . '</td>' .
           '</tr>'
     );
   }
@@ -94,7 +95,7 @@ function needUpdate() {
   $lines = getWorkFile();
   
   //If 60 seconds have passed, an update is necessary
-  if (microtime(true) > ($lines[0][0] + 60) || strlen($lines[0][0]) < 5)
+  if (microtime(true) > ($lines[0][0] + 30) || strlen($lines[0][0]) < 5)
     return TRUE;
   else
     return FALSE; 
@@ -166,11 +167,11 @@ function getStatus($url, $checkText) {
   
   //If the status is 200 and the html contains the checkString...
   if($status  == '200' && strpos($html, $checkText) !== FALSE) {
-    return(0); //OK
+    return('0' . '|' . $time . ' s'); //OK
   }else if($status  == '200') {
-    return(1); //Degraded
+    return('1' . '|' . $time . ' s'); //Degraded
   }else {
-    return(2); //Down
+    return('2' . '|' . 'Error: ' . $status); //Down
   }
 }
 
