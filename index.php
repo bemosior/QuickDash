@@ -58,8 +58,11 @@ function printStatus() {
   $siteList = getWorkFile();
 
   //Print out 
-  print('<table class="table table-bordered table-hover">
-           <tr><th>Status</th><th>Service</th><th>Time / Error</th></tr>');
+  print('<table class="table table-bordered table-hover" style="table-layout: fixed;">
+           <tr>
+		     <th style="width: 25%;">Status</th>
+			 <th style="width: 50%;">Service</th>
+			 <th style="width: 25%;">Load Time / Error</th></tr>');
  
   //Shift the list to skip the update time
   array_shift($siteList);
@@ -77,7 +80,7 @@ function printStatus() {
     //print table row
     print('<tr>' .
             '<td style="text-align:center;">' . $site[3] . '</td>' .
-            '<td>' . $site[0] . '</td>' .
+            '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
 			'<td>' . $site[4] . '</td>' .
           '</tr>'
     );
