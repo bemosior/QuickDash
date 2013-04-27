@@ -1,7 +1,7 @@
 QuickDash
 =========
 
-An easily installed PHP web dashboard that displays a simple status message about web services based on HTTP response code and HTML content.
+An easily installed PHP web dashboard that displays a simple status message about web services based on HTTP response code and HTML content. QuickDash is a great starting point for building a dashboard page.
 
 Take a quick look at the [Demo](https://bmosior.com/qd).
 
