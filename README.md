@@ -32,8 +32,26 @@ Ta-da.
 
 ##What's going on?
 * The 'configuration.db' file sets the web services to poll. 
-* Updates are user-triggered (when the page is visited), at a maximum of 1 update per 30 seconds.
+* Updates are user-triggered (when the page is visited), at a maximum of 1 update per 60 seconds (configurable).
 * A service is deemed "OK" if the HTTP status code is '200' and the HTML contains the context string.
 * A service is deemed "Degraded" if the HTTP status code is '200' and the HTML does **not** contain the context string.
 * A service is deemed "Down" if the HTTP status code is not '200' (redirects are followed, eventually resulting in a 200).
 * For simplicity, SSL certificates are simply accepted (no validation) by Curl (with 'https' URLs).
+
+##Known Issues
+Large numbers of services will cause a performance issue. The easiest way to mitigate the problem is to configure a cron job and then set the minimum seconds in 'index.php' to about twice the cron interval.
+That way, users will be served a cached version of the information without experiencing a separate query.
+
+
+Cron:
+
+```* * * * * cd /var/www/html/QuickDash ; /usr/bin/php index.php```
+
+index.php:
+```
+...
+//If minimum of X seconds have passed, an update is necessary
+  $minSeconds = 120; // <-- Set this
+  if (microtime(true) > ($lines[0][0] + $minSeconds) || strlen($lines[0][0]) < 5)
+...
+```
