@@ -5,7 +5,7 @@ A PHP web dashboard that displays a simple status message about web services bas
 
 Take a quick look at the [Demo](https://bmosior.com/qd).
 
-##Help!
+##Help
 QuickDash isn't perfect! Find a bug? Think a feature would fit well? File an issue or pull request!
 
 ##Test Environment:
@@ -28,7 +28,7 @@ Your mileage may vary.
 3. Modify 'configuration.db' with one entry per line in the following format: ```Name|URL|ContextString```, where "Name" is the display name of the web service, "URL" is the URL to check, and "Context" is a bit of HTML code that must be contained in the checked page. An example entry is included.
 4. Make sure 'tempwork.db' is writeable by the webserver ```chmod oug+rw tempwork.db```
 
-Ta-dah.
+Ta-da.
 
 ##What's going on?
 * The 'configuration.db' file sets the web services to poll. 
