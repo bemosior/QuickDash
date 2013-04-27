@@ -1,2 +1,4 @@
-1367034627.0817
-http://google.com|Welcomes|<div class="alert alert-error" style="margin-bottom:0px;">Down</div>
+1367039898.5565
+Google Search (100% match)|https://google.com|Google|0
+Google Search (no content match)|https://google.com|Googles|1
+Google Search (no match)|https://google.comd|Googles|2

@@ -1,1 +1,3 @@
-http://google.com|Welcomes
+Google Search (100% match)|https://google.com|Google
+Google Search (no content match)|https://google.com|Googles
+Google Search (no match)|https://google.comd|Googles
