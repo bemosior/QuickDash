@@ -5,7 +5,7 @@ A PHP web dashboard that displays a simple status message about web services bas
 
 Take a quick look at the [Demo](https://bmosior.com/qd).
 
-##Help!
+##Help
 QuickDash isn't perfect! Find a bug? Think a feature would fit well? File an issue or pull request!
 
 ##Test Environment:
