@@ -1,8 +1,5 @@
 <?php
 
-//Minimum seconds between potential polling times
-$minSeconds = 30;
-
 printHeader();
 
 printStatus();
@@ -100,7 +97,8 @@ function printStatus() {
 function needUpdate() {
   $lines = getWorkFile();
   
-  //If X seconds have passed, an update is necessary
+  //If minimum of X seconds have passed, an update is necessary
+  $minSeconds = 60;
   if (microtime(true) > ($lines[0][0] + $minSeconds) || strlen($lines[0][0]) < 5)
     return TRUE;
   else
