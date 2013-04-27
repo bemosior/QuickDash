@@ -36,4 +36,4 @@ Ta-dah.
 * A service is deemed "OK" if the HTTP status code is '200' and the HTML contains the context string.
 * A service is deemed "Degraded" if the HTTP status code is '200' and the HTML does **not** contain the context string.
 * A service is deemed "Down" if the HTTP status code is not '200' (redirects are followed, eventually resulting in a 200).
-* For simplicity, SSL certificates are not validated by Curl (with 'https' URLs).
+* For simplicity, SSL certificates are simply accepted (no validation) by Curl (with 'https' URLs).
