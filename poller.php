@@ -31,11 +31,20 @@ foreach ($urls as $url) {
 }
 $rc->execute();
 
+//Pull in completed tempfiles
 $lines = file('tempwork.db');
+
+//Remove time line
 $time = array_shift($lines);
+
+//Sort numerically by ID
 array_multisort($lines, SORT_NUMERIC);
+
+//Add time line back in
 array_unshift($lines, $time);
-file_put_contents('tempwork.db', $lines, LOCK_EX);
+
+//Publish to cache
+file_put_contents('cache.db', $lines, LOCK_EX);
 
 /**
  * Request Callback for cURL requests

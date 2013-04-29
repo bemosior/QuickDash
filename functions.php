@@ -43,7 +43,7 @@ function printFooter() {
 function printStatus() {
   
   //Grab the workfile
-  $siteList = getWorkFile();
+  $siteList = getCacheFile();
 
   //Print out 
   print('<table class="table table-bordered table-hover" style="table-layout: fixed;">');
@@ -151,8 +151,8 @@ function getConfigFile(){
  * Get work file contents
  *
  */
-function getWorkFile() {
-  $lines = file('tempwork.db');
+function getCacheFile() {
+  $lines = file('cache.db');
   foreach($lines as $key=>$line){
     $lines[$key] = explode('|',$line);
   }
