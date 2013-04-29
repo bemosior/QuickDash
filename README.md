@@ -11,7 +11,7 @@ QuickDash needs improvement! Find a bug? Think a feature would fit well? Add an 
 ##Test Environment:
 * Linux (CentOS)
 * Apache
-* PHP5
+* PHP5.3
 * Curl
 
 Your mileage may vary.
