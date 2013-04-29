@@ -46,13 +46,14 @@ function printStatus() {
   $siteList = getWorkFile();
 
   //Print out 
-  print('<table class="table table-bordered table-hover" style="table-layout: fixed;">
-           <tr>
-		     <th style="width: 25%;">Status</th>
-			 <th style="width: 50%;">Service</th>
-			 <th style="width: 25%;">Load Time / Error</th></tr>');
+  print('<table class="table table-bordered table-hover" style="table-layout: fixed;">');
  
-  //Shift the list to skip the update time
+  //Grab the time the data was last updated
+  $lastUpdatedTime = $siteList[0][0];
+  //Print the time the data was last updated in a "x seconds ago" format 
+  print('Last updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.' );
+  
+  //Shift the list to remove the update time from the list
   array_shift($siteList);
 
   foreach($siteList as $site) {
