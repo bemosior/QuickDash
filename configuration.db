@@ -1,3 +1,3 @@
-Test (100% match)|https://bmosior.com/qd/test|THIS IS A TEST
-Test (no content match)|https://bmosior.com/qd/test|THIS IS NOT A TEST
-Test2 (no match)|https://bmosior.com/qd/test2|THIS IS A TEST
+1|Test (100% match)|https://bmosior.com/qd/test?url=1|THIS IS A TEST
+2|Test (no content match)|https://bmosior.com/qd/test?url=2|THIS IS NOT A TEST
+3|Test2 (no match)|https://bmosior.com/qd/test2|THIS IS A TEST

@@ -57,7 +57,7 @@ function printStatus() {
   array_shift($siteList);
 
   foreach($siteList as $site) {
-    
+    array_shift($site);
     //Determine styling of status
     if($site[3]  == 0)
       $site[3] = '<div class="alert alert-success" style="margin-bottom:0px;">OK</div>';
@@ -77,42 +77,6 @@ function printStatus() {
   print('</table>');
   
 }
-
-
-/**
- * Run the site update sequence
- *
- */
-function updateSites() {
-
-  //Grab configuration file
-  $lines = file('configuration.db');
-
-  //Split up each line of the configuration file
-  foreach($lines as $key=>$line){
-   
-    //Remove newlines
-    $line = preg_replace('/[\n\r]/', '', $line);
-  
-    //Explode string into array
-    $lines[$key] = explode('|',$line);
-  }
-   
-   //Set the first entry in the file to be the update time.
-   $tempString = microtime(true) . "\n";
-
-   //Edit each line with the results
-   foreach($lines as $line) {
-     //Add the status to the line
-     $line[3] = getStatus($line[1], $line[2]);
-
-     //Add the line to the temp file string
-     $tempString .= $line[0] . '|' . $line[1] . '|' . $line[2] . '|' . $line[3] . "\n";
-   }
-
-   //Write new contents to file
-   file_put_contents('tempwork.db', $tempString);
- }
 
 /**
  * Get the status of a particular URL
@@ -152,9 +116,39 @@ function getStatus($url, $checkText) {
   }
 }
 
+/**
+ * Get config file contents
+ * 
+ */
+function getConfigFile(){
+
+  //Grab configuration file
+  $configFile = file('configuration.db');
+
+  //Entry array
+  $entries = array();
+
+  //Split up each line of the configuration file
+  foreach($configFile as $key=>$line){
+ 
+    //Remove newlines
+    $line = preg_replace('/[\n\r]/', '', $line);
+
+    
+    //Explode string into array
+    $configArray = explode('|',$line);
+    $entries[$configArray[2]] = array(
+                                'name' => $configArray[1],
+                                'contextString' => $configArray[3],
+                                'order' => $configArray[0]
+                              );
+  }
+  
+  return $entries;
+}
 
 /**
- * Get workfile contents
+ * Get work file contents
  *
  */
 function getWorkFile() {
