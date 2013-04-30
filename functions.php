@@ -60,15 +60,15 @@ function printStatus() {
     array_shift($site);
     //Determine styling of status
     if($site[3]  == 0)
-      $site[3] = '<div class="alert alert-success" style="margin-bottom:0px;">OK</div>';
+      $site[3] = '<div class="alert-message success" style="margin-bottom:0px;"><strong>OK</strong></div>';
     else if($site[3] == 1)
-      $site[3] = '<div class="alert" style="margin-bottom:0px;">Degraded</div>';
+      $site[3] = '<div class="alert-message warning" style="margin-bottom:0px;"><strong>Degraded</strong></div>';
     else if($site[3] == 2)
-      $site[3] = '<div class="alert alert-error" style="margin-bottom:0px;">Down</div>';
+      $site[3] = '<div class="alert-message error" style="margin-bottom:0px;"><strong>Down</strong></div>';
   
     //print table row
     print('<tr>' .
-            '<td style="text-align:center;">' . $site[3] . '</td>' .
+            '<td style="width:130px; text-align:center;">' . $site[3] . '</td>' .
             '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
 			'<td>' . $site[4] . '</td>' .
           '</tr>'
@@ -78,43 +78,6 @@ function printStatus() {
   
 }
 
-/**
- * Get the status of a particular URL
- *
- */
-function getStatus($url, $checkText) {
-
-  //Define a connection
-  $conn = curl_init($url);
-
-  //Set CURL options
-  curl_setopt($conn, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($conn, CURLOPT_SSL_VERIFYPEER, false);
-  curl_setopt($conn, CURLOPT_FOLLOWLOCATION, true);
-  curl_setopt($conn, CURLOPT_MAXREDIRS, 10);
-
-  //Grab HTML
-  $html = curl_exec($conn);
-  
-  //Remove newlines
-  $html = preg_replace('/[\n\r]/', '', $html);
-
-  //Grab HTTP response code
-  $status = curl_getinfo($conn, CURLINFO_HTTP_CODE);
-  $time = curl_getinfo($conn, CURLINFO_TOTAL_TIME);
-
-  //Close the connection
-  curl_close($conn);
-  
-  //If the status is 200 and the html contains the checkString...
-  if($status  == '200' && strpos($html, $checkText) !== FALSE) {
-    return('0' . '|' . $time . ' s'); //OK
-  }else if($status  == '200') {
-    return('1' . '|' . $time . ' s'); //Degraded
-  }else {
-    return('2' . '|' . 'Error: ' . $status); //Down
-  }
-}
 
 /**
  * Get config file contents
