@@ -59,17 +59,13 @@ function printStatus() {
 
   foreach($siteList as $site) {
     array_shift($site);
+    
     //Determine styling of status
-    if($site[3]  == 0)
-      $site[3] = '<div class="alert-message success" style="margin-bottom:0px;"><strong>OK</strong></div>';
-    else if($site[3] == 1)
-      $site[3] = '<div class="alert-message warning" style="margin-bottom:0px;"><strong>Degraded</strong></div>';
-    else if($site[3] == 2)
-      $site[3] = '<div class="alert-message error" style="margin-bottom:0px;"><strong>Down</strong></div>';
-  
+    $statusHTML = getStatusHTML($site[3]);
+
     //print table row
     print('<tr>' .
-            '<td style="width:130px; text-align:center;">' . $site[3] . '</td>' .
+            '<td style="width:130px; text-align:center;">' . $statusHTML . '</td>' .
             '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
             '<td style="width:130px;">' . $site[4] . '</td>' .
           '</tr>'
@@ -80,6 +76,23 @@ function printStatus() {
   //Print the time the data was last updated in a "x seconds ago" format 
   print('<p><small>Updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.</small></p>' );
   
+}
+
+
+/**
+ * Determine status HTML based on status code
+ * 
+ */
+function getStatusHTML($code) {
+  //0 is OK
+  //1 is Degraded
+  //2 is Down
+  if($code  == 0)
+    return '<div class="alert-message success"><strong>OK</strong></div>';
+  else if($code == 1)
+    return '<div class="alert-message warning"><strong>Degraded</strong></div>';
+  else if($code == 2)
+    return '<div class="alert-message error"><strong>Down</strong></div>';
 }
 
 
@@ -121,6 +134,19 @@ function getConfigFile(){
  */
 function getCacheFile() {
   $lines = file('cache.db');
+  foreach($lines as $key=>$line){
+    $lines[$key] = explode('|',$line);
+  }
+
+  return $lines;
+}
+
+/**
+ * Get group file contents
+ *
+ */
+function getGroupFile() {
+  $lines = file('groups.db');
   foreach($lines as $key=>$line){
     $lines[$key] = explode('|',$line);
   }

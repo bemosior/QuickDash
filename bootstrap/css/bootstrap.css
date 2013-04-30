@@ -5364,7 +5364,7 @@ a.badge:focus {
 
   position: relative;
   padding: 0px;
-  margin-bottom: 18px;
+  margin-bottom: 0px;
   color: #404040;
 
   background-color: #eedc94;
