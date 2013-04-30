@@ -12,9 +12,10 @@ function printHeader() {
     <head>
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
       <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" media="screen" />
-      <title>Status Page</title>
+      <title>QuickDash</title>
     </head>
     <body>
+      <script src="bootstrap/js/jquery.min.js"></script>
       <script src="bootstrap/js/bootstrap.min.js"></script>
       <br/><br/>
       <div class="container">
@@ -70,7 +71,7 @@ function printStatus() {
     print('<tr>' .
             '<td style="width:130px; text-align:center;">' . $site[3] . '</td>' .
             '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
-			'<td style="width:130px;">' . $site[4] . '</td>' .
+            '<td style="width:130px;">' . $site[4] . '</td>' .
           '</tr>'
     );
   }
@@ -113,8 +114,9 @@ function getConfigFile(){
   return $entries;
 }
 
+
 /**
- * Get work file contents
+ * Get cache file contents
  *
  */
 function getCacheFile() {
@@ -124,6 +126,34 @@ function getCacheFile() {
   }
 
   return $lines;
+}
+
+
+/**
+ * Request Callback for cURL requests
+ * 
+ */
+function request_callback($html, $info, $request) {
+  //Remove newlines
+  $html = preg_replace('/[\n\r]/', '', $html);
+  $url = array_shift(get_object_vars($request));
+  $time = array_shift(array_slice($info,8,1));
+  $responseCode = array_shift(array_slice($info,2,1));
+  $entries = getConfigFile();
+  
+  //Determine response
+  if($responseCode == '200' && strpos($html, $entries[$url]['contextString']) !== FALSE) {
+    $entries[$url][2] = '0' . '|' . 'Time: ' . $time . ' s'; //OK
+  }else if($responseCode  == '200') {
+    $entries[$url][2] = '1' . '|' . 'Time: ' . $time . ' s'; //Degraded
+  }else {
+    $entries[$url][2] = '2' . '|' . 'Error: ' . $responseCode; //Down
+  }
+  
+  //Add the line to the temp file string
+  $tempString = $entries[$url]['order'] . '|' . $entries[$url]['name'] . '|' . $url . '|' . $entries[$url]['contextString'] . '|' . $entries[$url][2] . "\n";
+  //Write new contents to file
+  file_put_contents('tempwork.db', $tempString, FILE_APPEND | LOCK_EX);
 }
 
 
