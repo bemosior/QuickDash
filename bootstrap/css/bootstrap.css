@@ -529,6 +529,7 @@ a:focus {
   margin-right: auto;
   margin-left: auto;
   *zoom: 1;
+  text-align:center;
 }
 .container:before,
 .container:after {
@@ -1717,7 +1718,6 @@ legend + .control-group {
 table {
   max-width: 100%;
   background-color: transparent;
-  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -1727,7 +1727,7 @@ table {
 }
 .table th,
 .table td {
-  padding: 8px;
+  padding: 5px;
   line-height: 20px;
   text-align: left;
   vertical-align: top;
@@ -5363,7 +5363,7 @@ a.badge:focus {
   font-size: 13px;
 
   position: relative;
-  padding: 7px 15px;
+  padding: 0px;
   margin-bottom: 18px;
   color: #404040;
 

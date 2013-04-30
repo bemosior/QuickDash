@@ -18,6 +18,7 @@ function printHeader() {
       <script src="bootstrap/js/bootstrap.min.js"></script>
       <br/><br/>
       <div class="container">
+      <h1>QuickDash</h1>
   ');
 
 }
@@ -47,12 +48,10 @@ function printStatus() {
   $siteList = getCacheFile();
 
   //Print out 
-  print('<table class="table table-bordered table-hover" style="table-layout: fixed;">');
+  print('<table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
  
   //Grab the time the data was last updated
   $lastUpdatedTime = $siteList[0][0];
-  //Print the time the data was last updated in a "x seconds ago" format 
-  print('Last updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.' );
   
   //Shift the list to remove the update time from the list
   array_shift($siteList);
@@ -71,11 +70,14 @@ function printStatus() {
     print('<tr>' .
             '<td style="width:130px; text-align:center;">' . $site[3] . '</td>' .
             '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
-			'<td>' . $site[4] . '</td>' .
+			'<td style="width:130px;">' . $site[4] . '</td>' .
           '</tr>'
     );
   }
   print('</table>');
+  
+  //Print the time the data was last updated in a "x seconds ago" format 
+  print('<p><small>Updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.</small></p>' );
   
 }
 
