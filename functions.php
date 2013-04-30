@@ -15,6 +15,7 @@ function printHeader() {
       <title>Status Page</title>
     </head>
     <body>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
       <br/><br/>
       <div class="container">
   ');

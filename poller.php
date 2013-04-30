@@ -60,9 +60,9 @@ function request_callback($html, $info, $request) {
   
   //Determine response
   if($responseCode == '200' && strpos($html, $entries[$url]['contextString']) !== FALSE) {
-    $entries[$url][2] = '0' . '|' . $time . ' s'; //OK
+    $entries[$url][2] = '0' . '|' . 'Time: ' . $time . ' s'; //OK
   }else if($responseCode  == '200') {
-    $entries[$url][2] = '1' . '|' . $time . ' s'; //Degraded
+    $entries[$url][2] = '1' . '|' . 'Time: ' . $time . ' s'; //Degraded
   }else {
     $entries[$url][2] = '2' . '|' . 'Error: ' . $responseCode; //Down
   }
