@@ -17,6 +17,12 @@ function printHeader() {
     <body>
       <script src="bootstrap/js/jquery.min.js"></script>
       <script src="bootstrap/js/bootstrap.min.js"></script>
+      <script>
+        $(document).ready ( function(){
+          $(\'.alert-message\').tooltip();
+        });
+      </script>
+
       <br/><br/>
       <div class="container">
       <h1>QuickDash</h1>
@@ -49,7 +55,8 @@ function printStatus() {
   $siteList = getCacheFile();
 
   //Print out 
-  print('<table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
+  print('<div id="demo" class="collapse in">
+  <table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
  
   //Grab the time the data was last updated
   $lastUpdatedTime = $siteList[0][0];
@@ -71,7 +78,7 @@ function printStatus() {
           '</tr>'
     );
   }
-  print('</table>');
+  print('</table></div><!--<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#demo">Collapse Pointlessly</button>-->');
   
   //Print the time the data was last updated in a "x seconds ago" format 
   print('<p><small>Updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.</small></p>' );
@@ -88,11 +95,11 @@ function getStatusHTML($code) {
   //1 is Degraded
   //2 is Down
   if($code  == 0)
-    return '<div class="alert-message success"><strong>OK</strong></div>';
+    return '<div class="alert-message success" data-title="The service responded and contained correct data." data-placement="left"><strong>OK</strong></div>';
   else if($code == 1)
-    return '<div class="alert-message warning"><strong>Degraded</strong></div>';
+    return '<div class="alert-message warning" data-title="The service responded but contained incorrect data." data-placement="left"><strong>Degraded</strong></div>';
   else if($code == 2)
-    return '<div class="alert-message error"><strong>Down</strong></div>';
+    return '<div class="alert-message error" data-title="The service did not respond." data-placement="left"><strong>Down</strong></div>';
 }
 
 
