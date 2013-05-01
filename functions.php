@@ -180,7 +180,8 @@ function request_callback($html, $info, $request) {
   }else if($responseCode  == '200') {
     $entries[$url][2] = '1' . '|' . 'Time: ' . $time . ' s'; //Degraded
   }else {
-    $entries[$url][2] = '2' . '|' . 'Error: ' . $responseCode; //Down
+    $entries[$url][2] = '2' . '|' . '<a target="_blank" href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#' . //Down
+        $responseCode . '">Error: ' . $responseCode . '</a>';
   }
   
   //Add the line to the temp file string
