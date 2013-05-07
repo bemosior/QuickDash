@@ -32,11 +32,14 @@ Your mileage may vary.
 
 Ta-da.
 
-##What's going on?
-* The 'configuration.db' file sets the web services to poll. 
+##General Information
 * Updates are run regularly with the cron and cached in a file for retrieval.
 * A service is deemed "OK" if the HTTP status code is '200' and the HTML contains the context string.
 * A service is deemed "Degraded" if the HTTP status code is '200' and the HTML does **not** contain the context string.
 * A service is deemed "Down" if the HTTP status code is not '200' (redirects are followed, eventually resulting in a 200).
 * For simplicity, SSL certificates are simply accepted (no validation) by Curl (with 'https' URLs).
 
+##Groups
+Basic group functionality has been added. To enable, edit index.php, comment out getStatus(), and uncomment getGroupStatus().
+
+Configure 'groups.db' with one group per line in the following format: ```Name|Members|Collapse```, where "Name" is the group's display name, "Members" is a comma-separated list (no spaces) of site IDs (from the configuration.db file), and "Collapse" is either 0 (load collapsed) or 1 (load uncollapsed).
