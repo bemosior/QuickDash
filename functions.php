@@ -85,6 +85,67 @@ function printStatus() {
   
 }
 
+/**
+ *  Returns the site object with the ID specified
+ *
+ */
+function findSiteWithId($id, $siteList) {
+  foreach($siteList as $site) {
+    if($id == $site[0]) {
+      return $site;
+    }
+  }
+}
+
+/**
+ * Print the status table
+ *
+ */
+function printGroupStatus() {
+  
+  //Grab the workfile and group configuration file
+  $siteList = getCacheFile();
+  $groupList = getGroupFile();
+  
+  //Grab the time the data was last updated
+  $lastUpdatedTime = $siteList[0][0];
+  
+  //Shift the list to remove the update time from the list
+  array_shift($siteList);
+  
+  //Process each group
+  $groupID = 0;
+  foreach($groupList as $group) {
+    $groupSites = explode(',',$group[1]);
+    print('<h3><a href="#" data-toggle="collapse" data-target="#group' . $groupID . '">' . $group[0] . '</a></h3>');
+    print('<div id="group' . $groupID . '" class="collapse in"><table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
+    foreach($groupSites as $site) {
+      $site = findSiteWithId($site, $siteList);
+      array_shift($site);
+      
+      //Determine styling of status
+      $statusHTML = getStatusHTML($site[3]);
+      
+      print('<tr>' .
+        '<td style="width:130px; text-align:center;">' . $statusHTML . '</td>' .
+        '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
+        '<td style="width:130px;">' . $site[4] . '</td>' .
+        '</tr>'
+      );
+    }
+    print('</table>');
+    print('</div>');
+    $groupID++;
+  }
+  
+ 
+  //print('</table></div><!--<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#demo">Collapse Pointlessly</button>-->');
+  
+  //Print the time the data was last updated in a "x seconds ago" format 
+  print('<p><small>Updated ' . round(microtime(true) - $lastUpdatedTime) . ' seconds ago.</small></p>' );
+  
+}
+
 
 /**
  * Determine status HTML based on status code
