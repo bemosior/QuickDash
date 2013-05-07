@@ -27,8 +27,13 @@ Your mileage may vary.
      * Extract the ZIP into the newly created directory.
 3. Modify 'configuration.db' with one entry per line in the following format: ```ID|Name|URL|ContextString```, where "ID" is the numerical, sequential unique ID of the entry, "Name" is the display name of the web service, "URL" is the URL to check, and "Context" is a bit of HTML code that must be contained in the checked page. An example entry is included. 
   * To skip the ContextString matching, use a space as the ContextString. That should handle most cases, but I'm aware it isn't ideal (future issue).
-4. Configure the poller cron: ```crontab -e``` ```* * * * * cd /your/html/directory/QuickDash ; /usr/bin/php poller.php```
-5. Make sure 'tempwork.db' and 'cache.db' files are writeable by the user making the changes.  ```chown thecronuser tempwork.db``` where "thecronuser" is the user under which the cronjob is configured.
+4. Configure Apache to block access to poller.php:
+```<Files poller.php>
+  Order allow,deny
+  Deny from all
+</Files>```
+5. Configure the poller cron: ```crontab -e``` ```* * * * * cd /your/html/directory/QuickDash ; /usr/bin/php poller.php```
+6. Make sure 'tempwork.db' and 'cache.db' files are writeable by the user making the changes.  ```chown thecronuser tempwork.db``` where "thecronuser" is the user under which the cronjob is configured.
 
 Ta-da.
 
