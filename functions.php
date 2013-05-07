@@ -117,8 +117,12 @@ function printGroupStatus() {
   $groupID = 0;
   foreach($groupList as $group) {
     $groupSites = explode(',',$group[1]);
-    print('<h3><a href="#" data-toggle="collapse" data-target="#group' . $groupID . '">' . $group[0] . '</a></h3>');
-    print('<div id="group' . $groupID . '" class="collapse in"><table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
+    print('<br/><button class="btn btn-primary" style="width:20%;" data-toggle="collapse" data-target="#group' . $groupID . '">' . $group[0] . '</button>');
+
+    print('<div id="group' . $groupID . '" class="collapse');
+    if($group[2] == 1)
+      print(' in');
+    print('"><table class="table table-bordered table-hover" style="width: auto; margin: 0 auto !important; float: none !important;">');
     foreach($groupSites as $site) {
       $site = findSiteWithId($site, $siteList);
       array_shift($site);
@@ -128,7 +132,7 @@ function printGroupStatus() {
       
       print('<tr>' .
         '<td style="width:130px; text-align:center;">' . $statusHTML . '</td>' .
-        '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
+        '<td style="width:50%;"><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
         '<td style="width:130px;">' . $site[4] . '</td>' .
         '</tr>'
       );
