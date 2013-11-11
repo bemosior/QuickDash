@@ -1,0 +1,5 @@
+1384128301.1337
+1|Test Succeed (100% match)|https://bmosior.com/qd/test?url=1|THIS IS A TEST|0|Time: 0.195958 s
+2|Test Semi-fail (no content match)|https://bmosior.com/qd/test?url=2|THIS IS NOT A TEST|1|Time: 0.196159 s
+3|Test Fail 404|https://bmosior.com/qd/test2|THIS IS A TEST|2|<a target="_blank" href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404">Error: 404</a>
+4|Test Fail 500|https://bmosior.com/qd/test500.php|THIS IS A TEST|2|<a target="_blank" href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500">Error: 500</a>

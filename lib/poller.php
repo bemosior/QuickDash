@@ -1,7 +1,7 @@
 <?php
 
-require('functions.php');
-require('RollingCurl.php');
+require('lib/functions.php');
+require('lib/RollingCurl.php');
 
 //Get the config file entries
 $entries = getConfigFile();
@@ -21,7 +21,7 @@ foreach($entries as $key => $line){
 $tempString = microtime(true) . "\n";
 
 //Write new contents to file
-file_put_contents('tempwork.db', $tempString, LOCK_EX);
+file_put_contents('tmp/tempwork.db', $tempString, LOCK_EX);
 
 $rc = new RollingCurl('request_callback');
 $rc->window_size = 20;
@@ -32,7 +32,7 @@ foreach ($urls as $url) {
 $rc->execute();
 
 //Pull in completed tempfiles
-$lines = file('tempwork.db');
+$lines = file('tmp/tempwork.db');
 
 //Remove time line
 $time = array_shift($lines);
@@ -44,7 +44,7 @@ array_multisort($lines, SORT_NUMERIC);
 array_unshift($lines, $time);
 
 //Publish to cache
-file_put_contents('cache.db', $lines, LOCK_EX);
+file_put_contents('tmp/cache.db', $lines, LOCK_EX);
 
 
 

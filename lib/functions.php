@@ -175,7 +175,7 @@ function getStatusHTML($code) {
 function getConfigFile(){
 
   //Grab configuration file
-  $configFile = file('configuration.db');
+  $configFile = file('conf/configuration.db');
 
   //Entry array
   $entries = array();
@@ -205,7 +205,7 @@ function getConfigFile(){
  *
  */
 function getCacheFile() {
-  $lines = file('cache.db');
+  $lines = file('tmp/cache.db');
   foreach($lines as $key=>$line){
     $lines[$key] = explode('|',$line);
   }
@@ -218,7 +218,7 @@ function getCacheFile() {
  *
  */
 function getGroupFile() {
-  $lines = file('groups.db');
+  $lines = file('conf/groups.db');
   foreach($lines as $key=>$line){
     $lines[$key] = explode('|',$line);
   }
@@ -252,7 +252,7 @@ function request_callback($html, $info, $request) {
   //Add the line to the temp file string
   $tempString = $entries[$url]['order'] . '|' . $entries[$url]['name'] . '|' . $url . '|' . $entries[$url]['contextString'] . '|' . $entries[$url][2] . "\n";
   //Write new contents to file
-  file_put_contents('tempwork.db', $tempString, FILE_APPEND | LOCK_EX);
+  file_put_contents('tmp/tempwork.db', $tempString, FILE_APPEND | LOCK_EX);
 }
 
 

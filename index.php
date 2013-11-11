@@ -1,6 +1,6 @@
 <?php
 
-include('functions.php');
+include('lib/functions.php');
 
 printHeader();
 
