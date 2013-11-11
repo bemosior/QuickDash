@@ -175,7 +175,7 @@ function getStatusHTML($code) {
 function getConfigFile(){
 
   //Grab configuration file
-  $configFile = file('conf/configuration.db');
+  $configFile = file('conf/sites.db');
 
   //Entry array
   $entries = array();

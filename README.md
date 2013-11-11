@@ -25,7 +25,7 @@ Your mileage may vary.
      * Download the ZIP file from the QuickDash GitHub repo page.
      * Create a directory in your web folder, like "QuickDash".
      * Extract the ZIP into the newly created directory.
-3. Modify 'conf/configuration.db' with one entry per line in the following format: ```ID|Name|URL|ContextString```, where "ID" is the numeric, sequential unique ID of the entry, "Name" is the display name of the web service, "URL" is the URL to check, and "Context" is a bit of HTML code that must be contained in the checked page. An example entry is included. 
+3. Modify 'conf/sites.db' with one entry per line in the following format: ```ID|Name|URL|ContextString```, where "ID" is the numeric, sequential unique ID of the entry, "Name" is the display name of the web service, "URL" is the URL to check, and "Context" is a bit of HTML code that must be contained in the checked page. An example entry is included. 
   * To skip the ContextString matching, use a space as the ContextString. That should handle most cases, but I'm aware it isn't ideal (future issue).
 4. Configure Apache to block access to poller.php:
 ```<Files lib/poller.php>
@@ -47,4 +47,4 @@ Ta-da.
 ##Groups
 Basic group functionality has been added. To enable, edit index.php, comment out getStatus(), and uncomment getGroupStatus().
 
-Configure 'conf/groups.db' with one group per line in the following format: ```Name|Members|Collapse```, where "Name" is the group's display name, "Members" is a comma-separated list (no spaces) of site IDs (from the conf/configuration.db file), and "Collapse" is either 0 (load collapsed) or 1 (load uncollapsed).
+Configure 'conf/groups.db' with one group per line in the following format: ```Name|Members|Collapse```, where "Name" is the group's display name, "Members" is a comma-separated list (no spaces) of site IDs (from the conf/sites.db file), and "Collapse" is either 0 (load collapsed) or 1 (load uncollapsed).
