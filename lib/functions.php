@@ -19,13 +19,30 @@ function printHeader() {
       <script src="bootstrap/js/bootstrap.min.js"></script>
       <script>
         $(document).ready ( function(){
+		  var keypress = 0;		  
           $(\'.alert-message\').tooltip();
+
+          //AJAX search added thanks to MiracleManS
+		  $("#search").keyup(function() {
+			var inpVal = $(this).val();
+		    if (keypress === 0) {
+				$(".trSearch").hide();
+			}
+			$(".trSearch").each(function() {
+				if($(this).text().indexOf(inpVal) >= 0)
+				{
+					$(this).show();
+				}
+			});
+		  });
         });
+
       </script>
 
       <br/><br/>
       <div class="container">
       <h1>QuickDash</h1>
+	  <div class="row"><label for="search">Search:</label><input type="text" name="search" id="search" /></div>
   ');
 
 }
@@ -71,9 +88,9 @@ function printStatus() {
     $statusHTML = getStatusHTML($site[3]);
 
     //print table row
-    print('<tr>' .
+    print('<tr class="trSearch">' .
             '<td style="width:130px; text-align:center;">' . $statusHTML . '</td>' .
-            '<td><a target="_blank" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
+            '<td><a target="_blank" class="itSearch" href="' . $site[1] . '">' . $site[0] . '</a></td>' .
             '<td style="width:130px;">' . $site[4] . '</td>' .
           '</tr>'
     );
