@@ -3,8 +3,6 @@ QuickDash
 
 A PHP web dashboard that displays a simple status message about web services based on the HTTP response code and HTML content. QuickDash is a great starting point for building a dashboard page and reasonably easy to install.
 
-Take a quick look at the [demo site](https://bmosior.com/qd).
-
 ##Help
 QuickDash needs improvement! Find a bug? Think a new feature would fit well? Add an issue or pull request!
 
